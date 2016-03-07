@@ -1,0 +1,53 @@
+enum Velocidades : Int {
+	case Apagado = 0, VelocidadBaja = 20, VelocidadMedia = 50, VelocidadAlta = 120
+
+	init(velocidadInicial : Velocidades){
+		self.rawValue = velocidadInicial.rawValue		
+	}
+	
+	convenience init(){		
+		self.rawValue = 0
+	}
+	
+}
+
+class Auto {
+
+	var velocidad =  Velocidades()
+
+	init(){
+		self.velocidad.rawValue = 0
+		self.velocidad =  Velocidades(self.velocidad)
+	}
+
+	funcion cambioDeVelocidad() -> (actual : Int, velocidadEnCadena: String){
+		
+		var velocidadNueva : Int
+
+		switch self.velocidad.rawValue {
+			case 0 :
+				velocidadNueva = 20
+			case 20 :
+				velocidadNueva = 50
+			case 50:
+				velocidadNueva = 120
+			case 120:
+				velocidadNueva = 0
+		}
+
+		self.velocidad.rawValue = velocidadNueva 				
+
+		var resultado = (self.velocidad.rawValue , self.velocidad)
+	
+		return resultado 
+	}
+
+}
+
+var car = Auto()
+
+for var i = 0; i<20 ; i++ {
+	var resultado =car.cambioDeVelocidad()
+	print("\(resultado.actual) , \(resultado.velocidadEnCadena)")
+}
+
